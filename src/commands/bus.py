@@ -1,9 +1,9 @@
-
 from typing import Type, Dict, List
 
 from . import Command
 from .handlers import Handler
 from .s3 import S3ReadCommand, S3ReadHandler
+
 
 class CommandBus:
     def __init__(self):
@@ -24,7 +24,7 @@ def get_command_bus() -> CommandBus:
     """
     Returns the command bus instance.
     This function is used to access the command bus from different parts of the application.
-        """
+    """
     command_bus = CommandBus()
     command_bus.register(S3ReadCommand, S3ReadHandler())
     return command_bus

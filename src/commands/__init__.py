@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Optional
 from .s3 import S3ReadCommand, S3ReadHandler
 
+
 class Command(ABC):
     """
     Abstract base class for commands.
@@ -22,6 +23,7 @@ class Command(ABC):
         This method can be overridden by subclasses to provide a custom string representation.
         """
         return f"{self.__class__.__name__}()"
+
 
 __all__ = [
     "Command",
