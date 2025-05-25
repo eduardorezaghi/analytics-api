@@ -3,6 +3,12 @@ from typing import Type, Dict, List
 from . import Command
 from .handlers import Handler
 from .s3 import S3ReadCommand, S3ReadHandler
+from .pandas.command import (
+    ReadCSVCommand, ComputePredictedAudienceCommand, MergeAvailableTimeCommand
+)
+from .pandas.handlers import (
+    ReadCSVHandler, ComputePredictedAudienceHandler, MergeAvailableTimeHandler
+)
 
 
 class CommandBus:
@@ -27,4 +33,7 @@ def get_command_bus() -> CommandBus:
     """
     command_bus = CommandBus()
     command_bus.register(S3ReadCommand, S3ReadHandler())
+    command_bus.register(ReadCSVCommand, ReadCSVHandler())
+    command_bus.register(ComputePredictedAudienceCommand, ComputePredictedAudienceHandler())
+    command_bus.register(MergeAvailableTimeCommand, MergeAvailableTimeHandler())
     return command_bus

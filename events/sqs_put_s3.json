@@ -1,0 +1,38 @@
+{
+    "Records": [
+        {
+            "eventVersion": "2.1",
+            "eventSource": "aws:s3",
+            "awsRegion": "us-east-1",
+            "eventTime": "2025-05-24T19:31:52.206Z",
+            "eventName": "ObjectCreated:Put",
+            "userIdentity": {
+                "principalId": "A3MEVC02YAX656"
+            },
+            "requestParameters": {
+                "sourceIPAddress": "201.13.115.149"
+            },
+            "responseElements": {
+                "x-amz-request-id": "H7B1XHTZFMD4DYK1",
+                "x-amz-id-2": "aDTtbnsOTIDV3MZg/VtWWDVG+uvNUhgCOQmgP6uPc13VUUfb2h/JASNZ8Fimd7PC1Vzdwr6eP5dtINxLxhoicXvSDwhdPzYG"
+            },
+            "s3": {
+                "s3SchemaVersion": "1.0",
+                "configurationId": "tf-s3-topic-20250524192544935700000001",
+                "bucket": {
+                    "name": "analytics-api-bucket",
+                    "ownerIdentity": {
+                        "principalId": "A3MEVC02YAX656"
+                    },
+                    "arn": "arn:aws:s3:::analytics-api-bucket"
+                },
+                "object": {
+                    "key": "tvaberta_program_audience.csv",
+                    "size": 567274,
+                    "eTag": "9ce998857675b94a5e7fd7880bb501cd",
+                    "sequencer": "0068321EA776673B5A"
+                }
+            }
+        }
+    ]
+}
