@@ -5,7 +5,6 @@ samconfig.toml
 .pytest_cache
 .ruff_cache
 **/__pycache__/*
-localstack
 tmp/
 
 # Terraform files.
