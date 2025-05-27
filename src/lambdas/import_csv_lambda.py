@@ -7,6 +7,8 @@ from src.commands.pandas import (
 )
 import io
 
+from src.database.postgres import write_program_predictions
+
 AUDIENCE_FILE = "tvaberta_program_audience.csv"
 SLOTS_FILE = "tvaberta_inventory_availability.csv"
 
@@ -100,7 +102,9 @@ def handler(event, context):
         )
     )
     
-    result_csv = result_df.to_csv(index=False)
+    
+    write_program_predictions(result_df)
+    
     return {
         "statusCode": 200,
     }
