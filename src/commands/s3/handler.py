@@ -3,22 +3,29 @@ import logging
 from .command import S3ReadCommand
 from boto3 import client
 from botocore.exceptions import BotoCoreError, ClientError
-
+from src.conf import settings
 
 class S3ReadHandler:
     def __init__(
         self,
         logger: logging.Logger = None,
-        boto3_client=None,
     ):
         self.logger = logger
-        self.boto3_client = boto3_client or self._create_boto3_client()
         self._setup_logging()
 
     def _create_boto3_client(self):
         import boto3
+        params = {
+            "aws_access_key_id": settings.aws_access_key_id,
+            "aws_secret_access_key": settings.aws_secret_access_key,
+            "aws_session_token": settings.aws_session_token,
+            "region_name": settings.aws_region,
+        }
+        if settings.endpoint_url:
+            params["endpoint_url"] = settings.endpoint_url
 
-        return boto3.client("s3")
+        client = boto3.client("s3", **params)
+        return client
 
     def _setup_logging(self):
         if self.logger is None:
@@ -35,7 +42,8 @@ class S3ReadHandler:
         # Simulate reading from S3
         self.logger.info(f"Executing command: {command}")
 
-        s3_client = self.boto3_client
+        # Create a boto3 S3 client
+        s3_client = self._create_boto3_client()
         try:
             self.logger.info(
                 f"Reading from S3 bucket: {command.bucket}, key: {command.key}"
@@ -45,6 +53,7 @@ class S3ReadHandler:
             return response
         except (BotoCoreError, ClientError) as e:
             self.logger.error(f"Error reading from S3: {e}")
+            raise e
 
     def _read_from_s3(self, s3_client, command: S3ReadCommand):
         """
@@ -55,4 +64,4 @@ class S3ReadHandler:
         """
         response = s3_client.get_object(Bucket=command.bucket, Key=command.key)
 
-        return response["Body"].read().decode("utf-8")
+        return response.get("Body").read().decode("utf-8")
