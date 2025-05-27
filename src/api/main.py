@@ -1,5 +1,6 @@
 import datetime
 from typing import Annotated
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi import APIRouter, Depends, FastAPI
 from fastapi.responses import JSONResponse
@@ -11,7 +12,7 @@ from src.api.schemas.requests import (
     ProgramPredictionPeriodRequest,
 )
 from src.api.schemas.responses import ProgramPredictionResponse
-from src.database.postgres import SessionLocal, get_db_session
+from src.database.postgres import get_async_session
 
 app = FastAPI()
 
@@ -59,7 +60,7 @@ def _parse_database_fields(
 @router.get("/program")
 async def get_program_predictions(
     request: Annotated[ProgramPredictionCodeRequest, Depends()],
-    db: Annotated[SessionLocal, Depends(get_db_session)],
+    db: Annotated[AsyncSession, Depends(get_async_session)],
 ) -> ProgramPredictionResponse:
     """
     Retrieve program predictions by program code and optional weekday.
@@ -68,7 +69,7 @@ async def get_program_predictions(
 
     # Ideally, this would be on a service-layer, not in the HTTP handler.
     # For simplicity, I'm doing it like this.
-    predictions_row = get_data_by_program_code(
+    predictions_row = await get_data_by_program_code(
         request.program_code, request.exhibition_date, db
     )
 
@@ -83,14 +84,14 @@ async def get_program_predictions(
 @router.get("/period")
 async def get_program_predictions_period(
     request: Annotated[ProgramPredictionPeriodRequest, Depends()],
-    db: Annotated[SessionLocal, Depends(get_db_session)],
+    db: Annotated[AsyncSession, Depends(get_async_session)],
 ) -> ProgramPredictionResponse:
     """
     Retrieve program predictions for a specific period by program code.
     """
     from src.database.postgres import get_data_by_period
 
-    predictions_row = get_data_by_period(
+    predictions_row = await get_data_by_period(
         request.program_code, request.start_date, request.end_date, db
     )
 
