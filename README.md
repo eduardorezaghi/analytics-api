@@ -11,6 +11,18 @@ Localmente, utilizei o Localstack para simular alguns serviços, como S3, SNS e 
 O PostgreSQL foi executado em um container Docker.
 
 ## Executando o projeto
+Configure um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+```dotenv
+# Localstack
+AWS_ACCESS_KEY_ID=000000000000000
+AWS_SECRET_ACCESS_KEY=000000000000000
+AWS_SESSION_TOKEN=000000000000000
+AWS_REGION=us-east-1
+ENDPOINT_URL=http://localhost:4566
+
+# PostgreSQL
+DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/analytics
+```
 Suba o Localstack e o PostgreSQL com o comando:
 ```bash
 docker-compose up -d
