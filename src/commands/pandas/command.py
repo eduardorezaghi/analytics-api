@@ -2,8 +2,6 @@ import csv
 from dataclasses import dataclass
 from typing import List, Any
 
-import pandas
-
 @dataclass(frozen=True)
 class ReadCSVCommand:
     """
@@ -20,7 +18,7 @@ class ComputePredictedAudienceCommand:
     """
     Command to compute rolling median 'predicted_audience' by signal, program_code, weekday.
     """
-    df: pandas.DataFrame
+    df: Any  # pandas.DataFrame
     signal_col: str
     program_code_col: str
     date_col: str
@@ -32,8 +30,8 @@ class MergeAvailableTimeCommand:
     """
     Command to merge available time slots with predicted audience.
     """
-    slots_df: pandas.DataFrame
-    predictions_df: pandas.DataFrame
+    slots_df: Any  # pandas.DataFrame
+    predictions_df: Any  # pandas.DataFrame
     left_on: List[str]
     right_on: List[str]
     how: str = "left"

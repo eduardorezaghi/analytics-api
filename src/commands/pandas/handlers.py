@@ -71,5 +71,5 @@ class MergeAvailableTimeHandler(Handler):
         )
         # select the final schema
         return merged[[
-            'signal', 'program_code', 'weekday', 'available_time', 'predicted_audience'
+            'signal', 'program_code', 'weekday', 'exhibition_date', 'available_time', 'predicted_audience'
         ]]
