@@ -40,7 +40,7 @@ class Settings(BaseSettings):
         env="ENDPOINT_URL",
         description="S3 endpoint URL",
     )
-    database_url: PostgresDsn = Field(
+    database_url: str = Field(
         ..., env="DATABASE_URL", description="Postgres database URL"
     )
 
