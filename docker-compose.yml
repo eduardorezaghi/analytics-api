@@ -1,0 +1,16 @@
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: eduardo
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+# volumes:
+#   my_pg_db:
