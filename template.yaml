@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless FastAPI and CSV Import Lambda deployment
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.12
+    MemorySize: 512
+
+Resources:
+  FastApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 256
+      Handler: src/lambda.handler
+      CodeUri: .
+      Events:
+        ApiEvents:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: .
+      DockerTag: python3.12-v1
+
+  ImportCsvFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/import_csv_lambda.handler
+      CodeUri: .
+      Events:
+        CsvImport:
+          Type: Api
+          Properties:
+            Path: /import-csv
+            Method: POST
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: .
+      DockerTag: python3.12-v1
+
+Outputs:
+  FastApiUrl:
+    Description: "API Gateway endpoint URL for FastAPI Lambda"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Run run.py with event file",
+      "program": "${workspaceFolder}/run.py",
+      "args": [
+        "--event-file",
+        "${input:eventFile}"
+      ]
+    },
+    {
+        "name": "Debug FastAPI app",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+            "src.api.main:app",
+            "--host",
+            "localhost",
+            "--port",
+            "8000"
+        ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "eventFile",
+      "type": "promptString",
+      "description": "Path to the mock event JSON file"
+    }
+  ]
+}
