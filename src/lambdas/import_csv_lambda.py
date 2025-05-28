@@ -88,8 +88,6 @@ def handler(event, context):
         )
     )
 
-    slots_df["weekday"] = slots_df["date"].dt.day_name()
-
     # merge predictions with available time slots
     # Note: the merge is done on signal, program_code and weekday
     result_df = bus.dispatch(
@@ -102,8 +100,14 @@ def handler(event, context):
         )
     )
     
-    
-    write_program_predictions(result_df)
+    try:
+        write_program_predictions(result_df)
+    except Exception as e:
+        print(f"Error writing to database: {e}")
+        return {
+            "statusCode": 500,
+            "body": "Error writing to database"
+        }
     
     return {
         "statusCode": 200,

@@ -63,6 +63,8 @@ class MergeAvailableTimeHandler(Handler):
         """
         Merges available time slots with predicted audience DataFrame.
         """
+        # ensure slots_df has 'weekday' column
+        command.slots_df['weekday'] = command.slots_df['date'].dt.day_name()
         merged = command.slots_df.merge(
             command.predictions_df,
             left_on=command.left_on,
