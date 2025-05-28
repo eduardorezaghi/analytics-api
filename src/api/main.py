@@ -1,9 +1,9 @@
 import datetime
 from typing import Annotated
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi import APIRouter, Depends, FastAPI
 from fastapi.responses import JSONResponse
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.api.exceptions import BadRequestException
 from src.api.schemas import ProgramPrediction
@@ -12,7 +12,11 @@ from src.api.schemas.requests import (
     ProgramPredictionPeriodRequest,
 )
 from src.api.schemas.responses import ProgramPredictionResponse
-from src.database.postgres import get_async_session
+from src.database.postgres import (
+    get_async_session,
+    get_data_by_period,
+    get_data_by_program_code,
+)
 
 app = FastAPI()
 
@@ -65,7 +69,6 @@ async def get_program_predictions(
     """
     Retrieve program predictions by program code and optional weekday.
     """
-    from src.database.postgres import get_data_by_program_code
 
     # Ideally, this would be on a service-layer, not in the HTTP handler.
     # For simplicity, I'm doing it like this.
@@ -89,8 +92,6 @@ async def get_program_predictions_period(
     """
     Retrieve program predictions for a specific period by program code.
     """
-    from src.database.postgres import get_data_by_period
-
     predictions_row = await get_data_by_period(
         request.program_code, request.start_date, request.end_date, db
     )

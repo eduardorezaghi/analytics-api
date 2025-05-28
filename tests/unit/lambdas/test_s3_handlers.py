@@ -18,13 +18,13 @@ def mock_s3_client():
     ...
 
 
-def test_correctly_reads_from_s3(mock_s3_client, mock_log_handler):
+def test_correctly_reads_from_s3(mocker,mock_s3_client, mock_log_handler):
     """Test the S3ReadHandler's read_from_s3 method."""
     # Arrange
     handler = S3ReadHandler(
-        boto3_client=mock_s3_client,
         logger=mock_log_handler,
     )
+    mocker.patch('src.commands.s3.handler.S3ReadHandler._create_boto3_client', return_value=mock_s3_client)
     
     # Act
     command = S3ReadCommand(bucket='test-bucket', key='test-key')
