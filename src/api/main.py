@@ -41,11 +41,6 @@ async def bad_request_exception_handler(request, exc: BadRequestException):
     )
 
 
-@router.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-
 def _parse_database_fields(
     rows: list[dict],
 ) -> list[ProgramPrediction]:

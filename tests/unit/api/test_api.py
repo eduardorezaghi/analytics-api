@@ -11,11 +11,6 @@ from src.api.main import app
 def client():
     return TestClient(app)
 
-def test_read_root(client):
-    response = client.get("/analytics/")
-    assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
-
 class DummyRow:
     def __init__(self, signal, program_code, weekday, total_available_time, avg_predicted_audience):
         self.signal = signal
