@@ -33,7 +33,7 @@ mypy = "^1.15.0"
 pytest-mock = "^3.14.0"
 
 [tool.pytest.ini_options]
-addopts = "--tb=short -p no:warnings"
+addopts = "-v --tb=short -p no:warnings"
 testpaths = [
     "tests",
 ]

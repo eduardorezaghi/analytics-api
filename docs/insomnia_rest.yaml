@@ -1,0 +1,116 @@
+_type: export
+__export_format: 4
+__export_date: 2025-05-28T01:36:45.638Z
+__export_source: insomnia.desktop.app:v10.3.1
+resources:
+  - _id: req_e989e4feef724acd81628dce8c610601
+    parentId: fld_903b192e7b4d487a9376d518b036e4f5
+    modified: 1748396077446
+    created: 1748395973164
+    url: http://localhost:8080/analytics/program
+    name: Get parsed data by Program Code
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_0140f4109aa64286b4768389d8e54b28
+        name: program_code
+        value: CASA
+        description: ""
+        disabled: false
+      - id: pair_c2640d5c7ce14df0b3a258072ad9a2cf
+        name: exhibition_date
+        value: 2020-06-27
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.1
+    authentication: {}
+    metaSortKey: -1748395973164
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_903b192e7b4d487a9376d518b036e4f5
+    parentId: wrk_scratchpad
+    modified: 1748396014729
+    created: 1748395969564
+    name: analytics
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1748395969564
+    environmentType: kv
+    _type: request_group
+  - _id: wrk_scratchpad
+    parentId: null
+    modified: 1736959197379
+    created: 1736959197379
+    name: Scratch Pad
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_7ee080da0e7d4883b89156282e0980a1
+    parentId: fld_903b192e7b4d487a9376d518b036e4f5
+    modified: 1748396139179
+    created: 1748396067432
+    url: http://localhost:8080/analytics/period
+    name: Get parsed data by Date Range
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_8e3fc057470f45159861b81d0ae1e577
+        name: program_code
+        value: CASA
+        description: ""
+        disabled: false
+      - id: pair_4d5f446b689947ef96028e1dbc61fbbb
+        name: start_date
+        value: 2020-04-11
+        description: ""
+        disabled: false
+      - id: pair_ffd4cc5e7a924fc189ac22fb8143cb63
+        name: end_date
+        value: 2020-06-27
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/10.3.1
+    authentication: {}
+    metaSortKey: -1748395973064
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    parentId: wrk_scratchpad
+    modified: 1736959205564
+    created: 1736959205564
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1736959205564
+    environmentType: kv
+    _type: environment
+  - _id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    parentId: wrk_scratchpad
+    modified: 1736959205637
+    created: 1736959205637
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar

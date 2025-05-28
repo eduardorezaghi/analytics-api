@@ -31,7 +31,7 @@ Com isso, o Localstack estará configurado, com os dois arquivos necessários, c
 
 Execute o arquivo [#run.py](./run.py) para simular o handler local e importá-los para o banco de dados PostgreSQL.
 ```bash
-python run.py
+python run.py --event-file ./events/sqs_put_s3.json
 ```
 
 Execute a API com o comando:
@@ -48,11 +48,18 @@ Utilizei duas ferramentas de IaC para criar alguns recursos na nuvem:
 
 ### Testes
 Utilizei pytest para criar testes unitários e de integração para a API.
+Para executá-los:
+```bash
+pytest
+```
+Também incluí testes REST com Insomnia, que podem ser encontrados na pasta [#docs/](./docs/insomnia_rest.yaml).
+Importe-os no Insomnia e execute os testes.
 
 
 ### Recursos utilizados
 Para transparência, deixo aqui todas as referências utilizadas.
 #### Artigos.
+ - https://github.com/aws-samples/aws-lambda-hexagonal-architecture?tab=readme-ov-file
  - https://github.com/awslabs/aws-lambda-web-adapter/blob/main/examples/fastapi/tests/unit/test_handler.py
  - https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-concepts.html
  - https://stackoverflow.com/questions/45732459/retrieve-delimiter-infered-by-read-csv-in-pandas
