@@ -45,6 +45,12 @@ e acesse a API em [http://localhost:8080/docs](http://localhost:8080/docs) para 
 Utilizei duas ferramentas de IaC para criar alguns recursos na nuvem:
  - Terraform para criar o banco de dados S3, SNS, SQS e IAM (permissões).
  - AWS SAM para criar os recursos do Lambda.
+Para criar os recursos, utilize o Terraform.
+```bash
+cd terraform
+terraform init
+terraform apply
+```
 
 ### Testes
 Utilizei pytest para criar testes unitários e de integração para a API.
