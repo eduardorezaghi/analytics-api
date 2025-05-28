@@ -16,17 +16,18 @@ services:
 
 
   database:
+    container_name: "postgres"
     image: postgres:latest
     environment:
-      POSTGRES_USER: eduardo
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: analytics
     ports:
       - "5432:5432"
-    expose:
-      - "5432"
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - .analytics_db:/var/lib/postgresql/data
+    depends_on:
+      - localstack
 
-# volumes:
-#   my_pg_db:
+volumes:
+  analytics_db:
